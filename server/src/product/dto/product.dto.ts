@@ -14,13 +14,13 @@ export class ProductDto {
     @IsNotEmpty()
     description: string;
 
-    @IsBoolean()
+    // @IsBoolean()
     active: boolean;
 
     // @IsArray()
     // @ArrayNotEmpty()
     // @IsString({ each: true })  // Ensure each element in the array is a string
-    // photos: string[];
+    photos: string[];
 
     @IsEnum(locationEnum)
     location: locationEnum;

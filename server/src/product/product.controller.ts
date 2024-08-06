@@ -1,10 +1,15 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post,UploadedFiles,UseInterceptors } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { ProductDto } from './dto';
+import { FilesInterceptor } from '@nestjs/platform-express';
+import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 
 @Controller('product')
 export class ProductController {
-    constructor(private productService: ProductService){}
+    constructor(
+        private productService: ProductService,
+        private readonly cloudinaryService: CloudinaryService
+    ){}
 
     @Get()
     async getAllProduct(){
@@ -12,8 +17,14 @@ export class ProductController {
     }
 
     @Post()
-    async createProduct(@Body() dto:ProductDto){
+    @UseInterceptors(FilesInterceptor('images', 10))
+    async createProduct(@Body() dto:ProductDto,@UploadedFiles() files: Express.Multer.File[]){
         //TODO: upload files
+        if (files) {
+            const results = await this.cloudinaryService.uploadImages(files);
+            const photoUrls = results.map(result => (result as { secure_url: string }).secure_url);
+            dto.photos = photoUrls;
+        }
         
         const product = await this.productService.createProduct(dto)
         return product;
