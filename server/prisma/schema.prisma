@@ -35,3 +35,15 @@ model Product {
   year_of_purchase Int?
   brand_name String?
 }
+
+model Auth{
+  id Int @default(autoincrement()) @id
+  username String 
+  password String
+  email String
+  emailVerificationToken String @default("")
+  isEmailVerified Boolean @default(false)
+  passwordResetToken String @default("")
+  passwordResetExpires DateTime @default(now())
+  createdAt DateTime @default(now())
+}
