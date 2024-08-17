@@ -22,11 +22,13 @@ import { JwtModule } from '@nestjs/jwt';
     CloudinaryModule,
     AuthModule,
     UtilsModule,
+
     JwtModule.register({
       global:true,
       secret: process.env.JWT_SECRET,
       signOptions: { expiresIn: '1h' }
     })
+    
   ],
   controllers: [AppController],
   providers: [AppService],

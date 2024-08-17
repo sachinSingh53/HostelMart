@@ -10,22 +10,21 @@ export class AuthService {
     constructor(
         private prismaService: PrismaService,
         private utils: UtilsService,
-        private jwtService:JwtService
+        private jwtService:JwtService,
     ) { }
 
     async signIn(username: string, password: string) {
-        let existingUser;
+        let existingUser:any;
+
         if (!this.utils.isEmail(username)) {
-            console.log(username)
             existingUser = await this.getUserByUsername(username);
         } else {
-
             existingUser = await this.getUserByEmail(username);
         }
+
         if(!existingUser){
             throw new ForbiddenException('invalid credentials')
         }
-        
         
         const isPasswordMatch = await bcrypt.compare(password,existingUser.password);
         if(!isPasswordMatch){
@@ -39,13 +38,14 @@ export class AuthService {
             email: existingUser.email
         }
 
+        const access_token = this.jwtService.sign(payload);
+
         return {
-            access_token:this.jwtService.sign(payload),
+            access_token,
             existingUser
         }
 
     }
-
 
     async register(dto: signupDTO) {
 
@@ -100,5 +100,7 @@ export class AuthService {
             }
         )
     }
+
+   
 
 }
