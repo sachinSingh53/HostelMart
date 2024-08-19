@@ -19,6 +19,45 @@ enum locationEnum{
   GH
   ISH
 }
+
+model Auth{
+  id Int @default(autoincrement()) @id
+  username String @unique()
+  password String 
+  email String @unique()
+  emailVerificationToken String @default("")
+  isEmailVerified Boolean @default(false)
+  passwordResetToken String @default("")
+  passwordResetExpires DateTime @default(now())
+  createdAt DateTime @default(now())
+}
+
+model Seller{
+  id Int @default(autoincrement()) @id
+  full_name String
+  username String @unique()
+  email String @unique()
+  profile_picture String ?
+  hostel_id String ?
+  hostel_name locationEnum
+  room_no Int
+  year Int
+  branch String
+  addmission_no String ?
+  roll_no Int
+  createdAt DateTime @default(now())
+}
+
+model Buyer{
+  id Int @default(autoincrement()) @id
+  email String @unique()
+  username String @unique()
+  is_seller Boolean @default(false)
+  purchased_products String[]
+  favourites String[] 
+  createdAt DateTime @default(now())
+}
+
 model Product {
   id Int @default(autoincrement()) @id
   title String 
@@ -27,23 +66,15 @@ model Product {
   active Boolean @default(true)
   photos String[]
   location locationEnum
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  // seller
-  // buyer
-  //category
+  seller_id Int
+  username String
+  email String
+  category String
   year_of_purchase Int?
   brand_name String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
-model Auth{
-  id Int @default(autoincrement()) @id
-  username String 
-  password String
-  email String
-  emailVerificationToken String @default("")
-  isEmailVerified Boolean @default(false)
-  passwordResetToken String @default("")
-  passwordResetExpires DateTime @default(now())
-  createdAt DateTime @default(now())
-}
+
+

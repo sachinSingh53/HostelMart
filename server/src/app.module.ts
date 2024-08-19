@@ -11,6 +11,7 @@ import { UtilsModule } from './utils/utils.module';
 
 import configuration from './config/configuration';
 import { JwtModule } from '@nestjs/jwt';
+import { UserModule } from './user/user.module';
 
 
 @Module({
@@ -27,7 +28,9 @@ import { JwtModule } from '@nestjs/jwt';
       global:true,
       secret: process.env.JWT_SECRET,
       signOptions: { expiresIn: '1h' }
-    })
+    }),
+
+    UserModule
     
   ],
   controllers: [AppController],
