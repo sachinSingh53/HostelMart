@@ -4,13 +4,15 @@ import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.useGlobalPipes(new ValidationPipe({
-    whitelist: true
-  }));
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+    }),
+  );
   // const hasSubPath = process.env.SUB_PATH !== undefined;
   // const UrlPrefix = hasSubPath ? process.env.SUB_PATH : '';
 
-  const BASE_PATH = '/api/v1'
+  const BASE_PATH = '/api/v1';
 
   // Exclude these endpoints from prefix. These endpoints are required for health checks.
   // const pathsToExclude = [];
@@ -31,4 +33,3 @@ async function bootstrap() {
   await app.listen(4000);
 }
 bootstrap();
-

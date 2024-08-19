@@ -10,6 +10,6 @@ import { UserService } from 'src/user/user.service';
 
   // })],
   controllers: [AuthController],
-  providers: [AuthService,JwtStrategy,UserService]
+  providers: [AuthService, JwtStrategy, UserService],
 })
 export class AuthModule {}

@@ -8,11 +8,9 @@ import { CloudinaryModule } from './cloudinary/cloudinary.module';
 import { AuthModule } from './auth/auth.module';
 import { UtilsModule } from './utils/utils.module';
 
-
 import configuration from './config/configuration';
 import { JwtModule } from '@nestjs/jwt';
 import { UserModule } from './user/user.module';
-
 
 @Module({
   imports: [
@@ -25,13 +23,12 @@ import { UserModule } from './user/user.module';
     UtilsModule,
 
     JwtModule.register({
-      global:true,
+      global: true,
       secret: process.env.JWT_SECRET,
-      signOptions: { expiresIn: '1h' }
+      signOptions: { expiresIn: '1h' },
     }),
 
-    UserModule
-    
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],

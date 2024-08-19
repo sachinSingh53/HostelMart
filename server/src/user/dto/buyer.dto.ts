@@ -1,20 +1,17 @@
-import { IsEmail, IsNotEmpty, IsString } from "class-validator";
+import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
 
+export class BuyerDto {
+  @IsNotEmpty()
+  @IsEmail()
+  email: string;
 
-export class BuyerDto{
+  @IsNotEmpty()
+  @IsString()
+  username: string;
 
-    @IsNotEmpty()
-    @IsEmail()
-    email:string
+  @IsString({ each: true })
+  purchased_products: [];
 
-    @IsNotEmpty()
-    @IsString()
-    username: string
-
-    @IsString({ each: true })
-    purchased_products: []
-
-    @IsString({each:true})
-    favourites: []
-    
+  @IsString({ each: true })
+  favourites: [];
 }

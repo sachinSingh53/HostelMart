@@ -1,2 +1,2 @@
-export * from './buyer.dto'
-export * from './seller.dto'
+export * from './buyer.dto';
+export * from './seller.dto';

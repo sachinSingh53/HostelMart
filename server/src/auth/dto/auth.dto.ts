@@ -1,24 +1,29 @@
-import { IsEmail, IsNotEmpty, IsString, IsStrongPassword, isString,IsOptional,ValidateIf } from "class-validator";
-
-
+import {
+  IsEmail,
+  IsNotEmpty,
+  IsString,
+  IsStrongPassword,
+  isString,
+  IsOptional,
+  ValidateIf,
+} from 'class-validator';
 
 export class signInDTO {
-    
-    @IsString()
-    username: string;
+  @IsString()
+  username: string;
 
-    @IsString()
-    password: string;
+  @IsString()
+  password: string;
 }
 
-export class signupDTO{
-    @IsString()
-    @IsNotEmpty()
-    username: string
+export class signupDTO {
+  @IsString()
+  @IsNotEmpty()
+  username: string;
 
-    @IsEmail()
-    email:string;
+  @IsEmail()
+  email: string;
 
-    @IsStrongPassword()
-    password: string
+  @IsStrongPassword()
+  password: string;
 }
